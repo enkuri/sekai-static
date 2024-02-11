@@ -127,6 +127,7 @@ function submitMask() {
     })
     .then(data => {
         console.log('Mask submitted successfully:', data);
+        window.location.replace(data['redirect']);
     })
     .catch(error => {
         console.error('Error submitting mask:', error);
