@@ -115,7 +115,8 @@ function submitMask() {
             rid: rId,
             hash: rHash,
             created: created,
-            life_time: lifeTime
+            life_time: lifeTime,
+            session_id: sessionId
         })
     })
     .then(response => {
