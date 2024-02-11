@@ -89,6 +89,29 @@ brushSlider.addEventListener('input', () => {
 });
 
 
+canvas.addEventListener('touchstart', (e) => {
+    isDrawing = true;
+    const touch = e.touches[0];
+    lastX = touch.clientX - canvas.getBoundingClientRect().left;
+    lastY = touch.clientY - canvas.getBoundingClientRect().top;
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    if (!isDrawing) return;
+    const touch = e.touches[0];
+    const x = touch.clientX - canvas.getBoundingClientRect().left;
+    const y = touch.clientY - canvas.getBoundingClientRect().top;
+    draw({ offsetX: x, offsetY: y });
+});
+
+canvas.addEventListener('touchend', () => {
+    isDrawing = false;
+});
+
+
+canvas.addEventListener('touchstart', (e) => e.preventDefault());
+canvas.addEventListener('touchmove', (e) => e.preventDefault());
+
 
 function submitMask() {
     // Create a new canvas to match the size of the original image
