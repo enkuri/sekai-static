@@ -113,7 +113,54 @@ canvas.addEventListener('touchstart', (e) => e.preventDefault());
 canvas.addEventListener('touchmove', (e) => e.preventDefault());
 
 
+// Function to disable the submit button
+function disableSubmitButton() {
+    const submitButton = document.getElementById('submit-button');
+    if (submitButton) {
+        submitButton.disabled = true;
+    }
+}
+
+// Function to create a global overlay with loading spinner and fade effect
+function showLoadingOverlay() {
+    // Create overlay container
+    const overlay = document.createElement('div');
+    overlay.id = 'loading-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.5s';
+    overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '9999';
+
+    // Create loading spinner
+    const spinner = document.createElement('div');
+    spinner.className = 'spinner-border text-light';
+    spinner.role = 'status';
+
+    // Append spinner to overlay
+    overlay.appendChild(spinner);
+
+    // Append overlay to the body
+    document.body.appendChild(overlay);
+
+    // Trigger smooth fade effect by setting opacity to 1
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+    }, 10);
+}
+
+
+
 function submitMask() {
+    disableSubmitButton();
+    showLoadingOverlay();
     // Create a new canvas to match the size of the original image
     const resizedCanvas = document.createElement('canvas');
     const resizedContext = resizedCanvas.getContext('2d');
