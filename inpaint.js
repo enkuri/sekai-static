@@ -133,3 +133,6 @@ function submitMask() {
         console.error('Error submitting mask:', error);
     });
 }
+
+image.addEventListener('load', resizeCanvas);
+document.addEventListener('DOMContentLoaded', resizeCanvas);
